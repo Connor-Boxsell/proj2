@@ -1,0 +1,16 @@
+widthp=80;
+widthm=0.004933;
+heightp=60;
+heightm=0.0037;
+cd=1; %distance to the camera
+ppm=heightp/heightm;  %pixels per metre = the height in pixels / the height in metres
+x=imread('T2.png');
+[centre,radius]=imfindcircles(x,[10,20], 'Sensitivity', 0.9) %finds circles in image x with radii between 10 an 20
+%outputs as a matrix in centre with x/y coordinates of circle centres,
+%number of pixels for the radius
+area_in_pixels=pi*radius^2 %area of a circle is pi*r^2
+x1=centre(1); x2=centre(2);
+diagonal_distance=sqrt((1-x1)^2+(1-x2)^2)/ppm %distance in pixels divided by pixels/metre which is distancep*metres/pixel
+%which cancels into distance in metres
+area_in_metres_squared=area_in_pixels/ppm %same thing
+radius_in_metres=radius/ppm
